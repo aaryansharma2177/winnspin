@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spin Wheel | Royal 420 KE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="spinBtn">Spin</div>
+        <div class="wheel">
+            <div class="number" style="--i:1;--clr:#db7093;">
+                <span>SWATCH</span>
+            </div>
+            <div class="number" style="--i:2;--clr:#20b2aa;">
+                <span>EARBUDS</span>
+            </div>
+            <div class="number" style="--i:3;--clr:#daa520;">
+                <span>Powerbank</span>
+            </div>
+            <div class="number" style="--i:4;--clr:#ff340f;">
+                <span>PocoX3</span>
+            </div>
+            <div class="number" style="--i:5;--clr:#4169e1;">
+                <span>Airconditioner</span>
+            </div>
+            <div class="number" style="--i:6;--clr:#3cb371;">
+                <span>XPWATCH</span>
+            </div>
+            <div class="number" style="--i:7;--clr:#d63e92;">
+                <span>iPhone13</span>
+            </div>
+            <div class="number" style="--i:8;--clr:#ff7f50;">
+                <span>Pendrive</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="giftMessage" class="hidden">You won: <span id="gift"></span>!</div>
+    <div id="claimText" class="hidden">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeVya992NzBFK8F3RZmkMqVWQQ_F73iGMN2gK8r99Dd-JDJsw/viewform?usp=sf_link" target="_blank">Claim Gift</a>
+    </div>
+
+    <script>
+        let wheel = document.querySelector('.wheel');
+        let spinBtn = document.querySelector('.spinBtn');
+        let giftMessage = document.getElementById('giftMessage');
+        let giftSpan = document.getElementById('gift');
+        let claimText = document.getElementById('claimText');
+        let value = Math.ceil(Math.random() * 35888);
+        let gifts = [ "SWATCH", "Pendrive",  "iPhone13", "XPWATCH", "Airconditioner", "Pocox3", "Powerbank",  "Earbuds"];
+
+        spinBtn.onclick = function () {
+            let randomRotation = Math.ceil(Math.random() * 3600);
+            wheel.style.transform = "rotate(" + (value + randomRotation) + "deg)";
+            value += randomRotation;
+
+            giftMessage.classList.add('hidden');
+            claimText.classList.add('hidden');
+
+            setTimeout(() => {
+                let selectedIndex = Math.floor((value % 360) / 45);
+                giftSpan.textContent = gifts[selectedIndex];
+                giftMessage.classList.remove('hidden');
+                claimText.classList.remove('hidden');
+            }, 5000); // Display gift and claim text after spin animation ends
+        }
+    </script>
+</body>
+
+</html>
